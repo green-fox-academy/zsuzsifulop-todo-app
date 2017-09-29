@@ -6,7 +6,7 @@ def what_to_do():
 def controller():
     if sys.argv[-1] == "to_do.py":
         what_to_do()
-    if sys.argv[-1] == "-l":
+    elif sys.argv[-1] == "-l":
         print_out()
     elif sys.argv[-2] == "-a":
         add_line(sys.argv[-1])

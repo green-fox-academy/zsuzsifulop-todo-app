@@ -1,0 +1,5 @@
+0 alma
+1 korte
+1 szilva
+1 narancs
+0 banan
