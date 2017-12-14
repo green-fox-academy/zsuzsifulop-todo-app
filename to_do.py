@@ -17,43 +17,40 @@ def controller():
     else:
         print("unsupport argument")
         what_to_do()
-   
+
 
 def list_the_items():
     file = open("to_do_list.txt", 'r')
     text = file.readlines()
     file.close()
-    todos = []
-    
+    todos = []    
     for line in text:
         dictionary = {}
-        if line[0] == "0": #0-dik eleme a sornak, tehát ez lesz a 0 vagy az 1es szám
+        if line[0] == "0": 
             dictionary["complete"] = False
         if line[0] == "1":
             dictionary["complete"] = True
-        things = line[2:] #szöveg része a sornak 
+        things = line[2:]
         dictionary["task"] = things
-        todos.append(dictionary) #hozzádja a listát a dictionaryhez! először
+        todos.append(dictionary)
     return todos
 
 
-#add todo here
 def add_line(todos_text):
-    todos = list_the_items() #megnyitjuk az előző def-et
+    todos = list_the_items()
     if todos != []:
-        todos[-1]['task'] = todos[-1]['task'][0:] + "\n" #a -1 sor elé beszúrunk egy spacet
+        todos[-1]['task'] = todos[-1]['task'][0:] + "\n"
     todo_dict = {"complete" : False, "task": todos_text}
-    todos.append(todo_dict) #hozzáfűzük a todo_dicter a korábbi todoshoz
-    write_out_file(todos)   #ez nagyon fontos! kiírjuk (meghívjuk a másik defincíciót)
+    todos.append(todo_dict)
+    write_out_file(todos)
 
-#write it back, new function
 
 def write_out_file(todos):
     text_to_file = ""
     for elements in todos:
-        if elements["complete"]: #ez azt jelenti h True
+        if elements["complete"]:
             text_to_file += '1 '
-        else: #ez meg azt jelenti hogy False
+        else:
             text_to_file += '0 ' 
         text_to_file += elements['task'] 
     text_to_write = open('to_do_list.txt', 'w')
@@ -81,7 +78,7 @@ def print_out():
 
 def check_complete(number_of_item):
     todos = list_the_items()
-    todos[number_of_item-1]['complete'] = True #eddig False volt, most átállítjuk true-ra!
+    todos[number_of_item-1]['complete'] = True
     write_out_file(todos)
 
 
@@ -96,7 +93,8 @@ def remove_line(number_of_items):
     elif number_of_items == str(number_of_items):
         print("unable to remove: index is not a bound")
     else:
-        del todos[number_of_items-1] #egész sor megy a kukába!
+        del todos[number_of_items-1]
         write_out_file(todos)
+
 
 controller()
